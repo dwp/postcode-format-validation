@@ -7,7 +7,7 @@ The class includes the BFPO format and has a query for a NI postcode.
 The class has a static method to validate user input, or it can be used dynamically to query the postcode itself.
 
 For example: 
-`PostCodeValidator::validateInput("AA9B 9DD");`
+`PostCodeValidator.validateInput("AA9B 9DD");`
 will return true as AA9B9DD is in a valid format.
 
 `PostCodeValidator postcodeValidator = new PostCodeValidator("AA9B 9DD");`
