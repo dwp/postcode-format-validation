@@ -13,7 +13,7 @@ will return true as AA9B9DD is in a valid format.
 `PostCodeValidator postcodeValidator = new PostCodeValidator("AA9B 9DD");`
 Both validates the input and configures the variable. If the input is not in valid postcode format, an InvalidPostcodeException will be thrown.
 
-####Project inclusion
+#### Project inclusion
 
 properties entry in pom
 
@@ -44,7 +44,7 @@ dependency reference
         <version>${dwp.formatvalidation.postcode}</version>
     </dependency>
     
-####Example of use
+#### Example of use
 
     import gov.dwp.utilities.formatvalidation.postcode;
 
