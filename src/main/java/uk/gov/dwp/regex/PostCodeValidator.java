@@ -1,14 +1,12 @@
-package gov.dwp.utilities.formatvalidation;
-
+package uk.gov.dwp.regex;
 
 import java.util.Locale;
 
 public class PostCodeValidator {
     private static final String POSTCODE_REGEX = "(^[A-Z&&[^QVX]]([A-Z&&[^IJZ]][0-9]([0-9]?|[ABEHMNPRVWXY]?)|[0-9]([0-9]?|[ABCDEFGHJKPSTUW]?))[0-9][A-Z&&[^CIKMOV]]{2}$)";
+    private static final String BFPO_REGEX = "(^(BFPO)[ ]?[0-9]{1,4}$)";
     private static final String NI_AREA_CODE = "BT";
     private static final String BFPO = "BFPO";
-    private static final String BFPO_REGEX = "(^(BFPO)[ ]?[0-9]{1,4}$)";
-
 
     private String outwardCode;
     private String inwardCode;
@@ -26,8 +24,9 @@ public class PostCodeValidator {
      * @throws InvalidPostcodeException if the inputPostCode is not in a valid format
      */
     public PostCodeValidator(String inputPostCode) throws InvalidPostcodeException {
-        if (!setPostCode(inputPostCode))
-            throw new InvalidPostcodeException(String.format("setPostCode Failed %s", inputPostCode));
+        if (!setPostCode(inputPostCode)) {
+            throw new InvalidPostcodeException(String.format("'%s' is invalid", inputPostCode));
+        }
     }
 
     /**
@@ -38,11 +37,8 @@ public class PostCodeValidator {
      * <p>False otherwise
      */
     public static boolean validateInput(String inputPostCode) {
-        return (null != inputPostCode) && (!inputPostCode.isEmpty()) &&
-                (reformatInput(inputPostCode).matches(POSTCODE_REGEX) ||
-                        reformatInput(inputPostCode).matches(BFPO_REGEX));
+        return (null != inputPostCode) && (!inputPostCode.isEmpty()) && (reformatInput(inputPostCode).matches(POSTCODE_REGEX) || reformatInput(inputPostCode).matches(BFPO_REGEX));
     }
-
 
     /**
      * A private function to standardise the input before validation
@@ -116,13 +112,14 @@ public class PostCodeValidator {
         String returnString;
         if (isBFPO()) {
             returnString = null;
+
+        } else if (('A' <= outwardCode.charAt(1)) && (outwardCode.charAt(1) <= 'Z')) {
+            returnString = outwardCode.substring(0, 2);
+
         } else {
-            if (('A' <= outwardCode.charAt(1)) &&
-                    (outwardCode.charAt(1) <= 'Z'))
-                returnString = outwardCode.substring(0, 2);
-            else
-                returnString = outwardCode.substring(0, 1);
+            returnString = outwardCode.substring(0, 1);
         }
+
         return returnString;
     }
 
@@ -136,13 +133,14 @@ public class PostCodeValidator {
         String returnString;
         if (isBFPO()) {
             returnString = null;
+
+        } else if (('A' <= outwardCode.charAt(1)) && (outwardCode.charAt(1) <= 'Z')) {
+            returnString = outwardCode.substring(2);
+
         } else {
-            if (('A' <= outwardCode.charAt(1)) &&
-                    (outwardCode.charAt(1) <= 'Z'))
-                returnString = outwardCode.substring(2);
-            else
-                returnString = outwardCode.substring(1);
+            returnString = outwardCode.substring(1);
         }
+
         return returnString;
     }
 
@@ -152,10 +150,7 @@ public class PostCodeValidator {
      * @return String
      */
     public String returnSector() {
-        if (isBFPO()) {
-            return null;
-        }
-        return inwardCode.substring(0, 1);
+        return isBFPO()? null : inwardCode.substring(0, 1);
     }
 
     /**
@@ -164,10 +159,7 @@ public class PostCodeValidator {
      * @return String
      */
     public String returnUnit() {
-        if (isBFPO()) {
-            return null;
-        }
-        return inwardCode.substring(1);
+        return isBFPO()? null : inwardCode.substring(1);
     }
 
     /**
@@ -176,10 +168,7 @@ public class PostCodeValidator {
      * @return boolean <p>True: the set postcode is a NI postcode <p>False: the postcode is not set as a NI code
      */
     public boolean isNorthernIreland() {
-        if (isBFPO()) {
-            return false;
-        }
-        return returnArea().contains(NI_AREA_CODE);
+        return !isBFPO() && returnArea().contains(NI_AREA_CODE);
     }
 
     public boolean isBFPO() {

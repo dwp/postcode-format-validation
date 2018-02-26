@@ -20,42 +20,27 @@ properties entry in pom
     <properties>
         <dwp.formatvalidation.postcode>x.x</dwp.formatvalidation.postcode>
     </properties>
-    
-internal Artifactory repository reference is required (plugin reference required for OWASP checks)
-
-    <repositories>
-        <repository>
-            <id>dwp internal</id>
-            <url>###REPOSITORY_URL###</url>
-        </repository>
-    </repositories>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>dwp internal</id>
-            <url>###REPOSITORY_URL###</url>
-        </pluginRepository>
-    </pluginRepositories>
 
 dependency reference
 
     <dependency>
-        <groupId>gov.dwp.software-engineering.formatvalidation</groupId>
-        <artifactId>postcode</artifactId>
+        <groupId>uk.gov.dwp.regex</groupId>
+        <artifactId>postcode-validation</artifactId>
         <version>${dwp.formatvalidation.postcode}</version>
     </dependency>
     
 #### Example of use
 
-    import gov.dwp.utilities.formatvalidation.postcode;
+    import uk.gov.dwp.regex.PostCodeValidator;
 
 _declaration_
 
 `PostCodeValidator postcodeValidator = new PostCodeValidator("AA9B 9DD");`
 
-_Use_
+_Use example_
 
 `postcodeValidator.returnArea()`
 
-or as above:
+or statically as:
 
-`PostCodeValidator::validateInput("AA9B 9DD");`
+`PostCodeValidator.validateInput("AA9B 9DD");`
