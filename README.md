@@ -1,4 +1,5 @@
 # PostCodeValidator
+[![Build Status](https://travis-ci.org/dwp/postcode-format-validation.svg?branch=master)](https://travis-ci.org/dwp/postcode-format-validation) [![Known Vulnerabilities](https://snyk.io/test/github/dwp/postcode-format-validation/badge.svg)](https://snyk.io/test/github/dwp/postcode-format-validation)
 
 This class performs validation of a postcode format. It uses regex to do this. There is no validation that the postcode itself is valid. There is no data lookup functionality.
 
