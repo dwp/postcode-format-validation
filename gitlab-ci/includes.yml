@@ -1,11 +1,11 @@
 include:
   # .pre
-#  - project: 'dwp/engineering/pipeline-solutions/gitlab/fragments/fragment-version-check'
-#    ref: 2-3-5
-#    file: 'ci-include-fragment-version-check.yml'
-#  - project: 'dwp/engineering/pipeline-solutions/gitlab/fragments/required-fragment-check'
-#    ref: 2-9-2
-#    file: 'ci-include-required-fragment-check.yml'
+  - project: 'dwp/engineering/pipeline-solutions/gitlab/fragments/fragment-version-check'
+    ref: 2-3-5
+    file: 'ci-include-fragment-version-check.yml'
+  - project: 'dwp/engineering/pipeline-solutions/gitlab/fragments/required-fragment-check'
+    ref: 2-9-2
+    file: 'ci-include-required-fragment-check.yml'
   # update-version
   - project: 'dwp/engineering/pipeline-solutions/gitlab/fragments/update-semver'
     ref: 4-4-2
@@ -54,7 +54,7 @@ include:
     file: 'ci-include-create-project-badges.yml'
   # open-sourcing
   - project: 'dwp/engineering/pipeline-solutions/gitlab/fragments/open-source'
-    ref: f-11
+    ref: 2-0-1
     file: 'ci-include-open-source.yml'
   # schedule create
   - project: 'dwp/engineering/pipeline-solutions/gitlab/fragments/schedule-creation'
