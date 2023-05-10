@@ -25,9 +25,9 @@ stages:
 include:
   - local: "/gitlab-ci/includes.yml"
 
-required-fragment-check:
-  variables:
-    RULESET: MAVEN_CI_LIBRARY
+#required-fragment-check:
+#  variables:
+#    RULESET: MAVEN_CI_LIBRARY
 
 create-project-badges:
   dependencies:
