@@ -2,6 +2,11 @@ package uk.gov.dwp.regex;
 
 import java.util.Locale;
 
+/**
+ * <p>PostCodeValidator class.</p>
+ *
+ * @version $Id: $Id
+ */
 public class PostCodeValidator {
   private static final String POSTCODE_REGEX =
       "(^[A-Z&&[^QVX]]([A-Z&&[^IJZ]][0-9]([0-9]?|[ABEHMNPRVWXY]?)|[0-9]"
@@ -13,6 +18,9 @@ public class PostCodeValidator {
   private String outwardCode;
   private String inwardCode;
 
+  /**
+   * <p>Constructor for PostCodeValidator.</p>
+   */
   public PostCodeValidator() {
     // plain old class
   }
@@ -21,7 +29,7 @@ public class PostCodeValidator {
    * Constructor takes a sting input and validates it prior to setting the internal elements.
    *
    * @param inputPostCode as per the variable name!!!
-   * @throws InvalidPostcodeException if the inputPostCode is not in a valid format
+   * @throws uk.gov.dwp.regex.InvalidPostcodeException if the inputPostCode is not in a valid format
    */
   public PostCodeValidator(String inputPostCode) throws InvalidPostcodeException {
     if (!setPostCode(inputPostCode)) {
@@ -40,7 +48,7 @@ public class PostCodeValidator {
     return null != inputPostCode
         && !inputPostCode.isEmpty()
         && (reformatInput(inputPostCode).matches(POSTCODE_REGEX)
-            || reformatInput(inputPostCode).matches(BFPO_REGEX));
+        || reformatInput(inputPostCode).matches(BFPO_REGEX));
   }
 
   /**
@@ -172,6 +180,11 @@ public class PostCodeValidator {
     return !isBFPO() && returnArea().contains(NI_AREA_CODE);
   }
 
+  /**
+   * <p>isBFPO.</p>
+   *
+   * @return a boolean
+   */
   public boolean isBFPO() {
     return returnOutwardCode().contains(BFPO);
   }
